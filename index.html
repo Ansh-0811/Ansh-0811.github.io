@@ -1,0 +1,1402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ansh Kumar | Helix Data Creator at Figure AI, builder of YoCam</title>
+<meta name="description" content="Ansh Kumar is a Helix Data Creator at Figure AI, top of the weekly data creator leaderboard, and the builder of YoCam, an AI dashcam on a Raspberry Pi 5 with a custom HAT board, working in a car.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ECEFF2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B2545" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://ansh-0811.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ansh-0811.github.io/">
+<meta property="og:site_name" content="Ansh Kumar">
+<meta property="og:title" content="Ansh Kumar | Helix Data Creator at Figure AI, builder of YoCam">
+<meta property="og:description" content="Top of the weekly data creator leaderboard at Figure AI. Builder of YoCam, an AI dashcam on a Raspberry Pi 5 with a custom HAT board, working in a car.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231B4B9B'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-weight='700' font-size='15' text-anchor='middle' fill='white'%3EAK%3C/text%3E%3C/svg%3E">
+<script>
+/* Marks the page as scripted before first paint, and restores a saved theme. If the main script never finishes, the mark is removed so nothing stays hidden. */
+(function(){var r=document.documentElement;r.classList.add('js');try{var t=localStorage.getItem('ak-theme');if(t==='light'||t==='dark')r.setAttribute('data-theme',t)}catch(e){}setTimeout(function(){if(!window.__akReady)r.classList.remove('js')},3000)})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+/* Concept: a drawing set. Light is a blueline print on vellum, dark is a cyanotype. */
+:root{
+  color-scheme:light dark;
+  --bg:#ECEFF2; --surface:#F8FAFB; --ink:#10243F; --muted:#44546A; --line:#1B4B9B;
+  --accent:#A0460F; --accent-ink:#FFFFFF; --rule:#C3CBD6; --grid:#DFE5EB; --hatch:#B7C5DB;
+  --display:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --text:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gutter:clamp(1rem,4vw,3rem);
+  /* Motion: one easing family, one duration scale. */
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+  --t-press:120ms; --t-ui:200ms; --t-draw:700ms;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B2545; --surface:#0F2E55; --ink:#EAF2FB; --muted:#A9BDD6; --line:#8EC5FF;
+    --accent:#F2A65A; --accent-ink:#0B2545; --rule:#2A4E7E; --grid:#14345E; --hatch:#2F5C94;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0B2545; --surface:#0F2E55; --ink:#EAF2FB; --muted:#A9BDD6; --line:#8EC5FF;
+  --accent:#F2A65A; --accent-ink:#0B2545; --rule:#2A4E7E; --grid:#14345E; --hatch:#2F5C94;
+}
+:root[data-theme="light"]{color-scheme:light}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:1rem;scrollbar-color:var(--line) var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;accent-color:var(--accent);caret-color:var(--accent)}
+::selection{background:var(--line);color:var(--surface)}
+a{color:var(--line);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+strong,b{font-weight:600}
+svg{display:block}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:.75rem;top:.75rem;z-index:30;background:var(--surface);color:var(--ink);padding:.6rem .9rem;border:1.5px solid var(--line)}
+
+/* Top bar. Becomes a sticky section index at the left on wide screens. */
+.top{background:var(--bg);border-bottom:1px solid var(--rule)}
+.top-in{width:min(1120px,calc(100% - 2*var(--gutter)));margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:0 1.25rem;min-height:3.25rem}
+.name{font-family:var(--display);font-weight:700;font-size:1.375rem;letter-spacing:.01em;color:var(--ink);text-decoration:none;padding:.5rem 0;margin-right:auto}
+.top nav ul{display:flex;flex-wrap:wrap;gap:0 clamp(.8rem,2.2vw,1.6rem)}
+.top nav a{display:inline-block;padding:.75rem 0;font-size:.9375rem;font-weight:500;color:var(--ink);text-decoration:none}
+.top nav a:hover{color:var(--line);text-decoration:underline;text-decoration-thickness:2px}
+.top nav a[aria-current]{box-shadow:inset 0 -2px 0 var(--accent)}
+.rail-mail{display:none}
+.theme{display:inline-flex;align-items:center;gap:.45rem;min-height:2.25rem;padding:0 .7rem;border:1.25px solid var(--line);background:transparent;color:var(--ink);font:500 .875rem/1 var(--text);cursor:pointer;transition:background-color var(--t-ui) var(--ease-out),color var(--t-ui) var(--ease-out),transform var(--t-press) var(--ease-out)}
+.theme::before{content:"";width:.7rem;height:.7rem;border:1.25px solid currentColor;background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.theme:hover{background:var(--line);color:var(--surface)}
+.theme:active{transform:scale(.97)}
+@media (max-width:599px){
+  .top-in{width:calc(100% - 2rem);min-height:0;padding-top:.35rem}
+  .top nav{flex-basis:100%}
+  .top nav ul{gap:0 .8rem}
+  .top nav a{padding:.45rem 0 .7rem;font-size:.875rem}
+}
+/* Sticky only where the name, the theme button and all seven links fit on one row */
+@media (min-width:820px) and (max-width:1279px){
+  html{scroll-padding-top:4.5rem}
+  .top{position:sticky;top:0;z-index:10}
+}
+
+/* Sheets */
+.sheet{width:min(1120px,calc(100% - 2*var(--gutter)));margin:clamp(1.25rem,3vw,2.25rem) auto 0;background:var(--surface);border:1px solid var(--rule);padding:clamp(1.5rem,3.2vw,2.75rem)}
+.sheet-head{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem 1.5rem;padding-bottom:.6rem;margin-bottom:clamp(1.25rem,2.6vw,2rem)}
+.sheet-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--line);transform-origin:0 50%}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,3.8vw,2.9rem);line-height:1.05;letter-spacing:.01em;text-transform:uppercase}
+h3{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.15;letter-spacing:.01em}
+h4{font-family:var(--text);font-weight:600;font-size:1.0625rem;line-height:1.35}
+.meta{font-family:var(--mono);font-size:.8125rem;line-height:1.5;color:var(--muted);font-variant-numeric:tabular-nums}
+.sheet-head .meta,.hist .meta{font-family:var(--text);font-size:.9375rem}
+.prose{max-width:66ch;text-wrap:pretty}
+.prose + .prose{margin-top:.9rem}
+.note{font-size:.9375rem;color:var(--muted);max-width:66ch}
+.sub{margin-top:clamp(2rem,4vw,3rem)}
+.sub > h3{padding-bottom:.45rem;border-bottom:1.5px solid var(--line);margin-bottom:1.1rem}
+/* Case studies keep the drawing-sheet frame with a heavier top rule. Background and Contact sit straight on the page. */
+.sheet.case{border-top:3px solid var(--line)}
+.sheet.plain{background:transparent;border:0;padding-inline:0}
+.sheet.plain h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+@media (max-width:599px){
+  .sheet{width:100%;border-inline:0;padding-inline:1rem}
+  .sheet.plain{padding-inline:1rem}
+  .sheet.hero{margin-top:0;border-top:0}
+  .sub{margin-top:1.5rem}
+}
+
+/* Drawing panels: grid paper only where something is drawn */
+.drawing{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:16px 16px;border:1px solid var(--rule)}
+figcaption{font-size:.9375rem;line-height:1.5;color:var(--muted)}
+
+/* Buttons */
+.btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-flex;align-items:center;min-height:2.875rem;padding:0 1.2rem;border:1.5px solid var(--line);background:transparent;color:var(--line);font:600 1rem/1 var(--text);text-decoration:none;cursor:pointer;transition:background-color var(--t-ui) var(--ease-out),color var(--t-ui) var(--ease-out),border-color var(--t-ui) var(--ease-out),transform var(--t-press) var(--ease-out)}
+.btn:hover,.btn[aria-pressed="true"]{background:var(--line);color:var(--surface)}
+.btn:active{transform:scale(.97)}
+a.btn.primary,.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+
+/* Title block cells */
+.tb{display:grid;grid-template-columns:1fr;gap:1px;background:var(--rule);border:1.5px solid var(--line)}
+.tb > div{background:var(--surface);padding:.6rem .85rem;min-width:0}
+.tb dt{font-family:var(--mono);font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tb dd{font-weight:500;line-height:1.4;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.tb dd span{display:block;font-weight:400;font-size:.9375rem;color:var(--muted)}
+@media (min-width:600px){.tb{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.tb.four{grid-template-columns:1.2fr .8fr 1fr 1.4fr}}
+.tb a[href^="mailto"]{font-size:.9375rem}
+
+/* Hero */
+.hero-grid{display:grid;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+@media (min-width:960px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+h1{font-size:1rem;font-weight:400;line-height:1.2}
+.who{display:block;font-family:var(--display);font-weight:700;font-size:1.375rem;line-height:1.1;letter-spacing:.08em;text-transform:uppercase;color:var(--line);padding-bottom:.55rem;margin-bottom:.9rem;border-bottom:1.5px solid var(--line)}
+.who small{display:block;margin-top:.3rem;font:400 .8125rem/1.4 var(--mono);letter-spacing:.02em;text-transform:none;color:var(--muted)}
+@media (min-width:600px){.who small{display:inline;margin:0 0 0 .6rem;white-space:nowrap}}
+.claim{display:block;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,1.25rem + 3.3vw,3.25rem);line-height:1.02;letter-spacing:-.005em;text-wrap:balance}
+.lede{font-size:clamp(1.0625rem,.98rem + .4vw,1.1875rem);line-height:1.55;max-width:56ch;margin-top:1.1rem;text-wrap:pretty}
+.hero .btns{margin-top:1.5rem}
+.hero .tb{margin-top:clamp(1.5rem,3.5vw,2.5rem)}
+
+/* Hero plan drawing */
+.plan{padding:.6rem .6rem .9rem}
+.plan svg{width:100%;height:auto}
+.plan .k{fill:none;stroke:var(--ink);stroke-width:1.9;stroke-linejoin:round}
+.plan .k2{fill:none;stroke:var(--ink);stroke-width:1.15}
+.plan .hid{fill:none;stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4}
+.plan .ctr{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:16 4 3 4}
+.plan .cmp{fill:var(--surface);stroke:var(--accent);stroke-width:1.9;stroke-linejoin:round}
+.plan .cmp-in{fill:none;stroke:var(--accent);stroke-width:1.1}
+.plan .wire{fill:none;stroke:var(--accent);stroke-width:1.6}
+.plan .fov{fill:none;stroke:var(--accent);stroke-width:1.1;stroke-dasharray:3 4}
+.plan .ld{fill:none;stroke:var(--line);stroke-width:1.15}
+.plan .bl circle{fill:var(--surface);stroke:var(--line);stroke-width:1.6}
+.plan text{font-family:var(--mono);font-weight:600;font-size:22px;fill:var(--ink)}
+.plan .bl text{text-anchor:middle}
+.plan .dir{fill:var(--muted);font-weight:500;font-size:22px;letter-spacing:.06em}
+.plan .dir-a{fill:none;stroke:var(--muted);stroke-width:1.2}
+.plan .dir-h{fill:var(--muted)}
+.lg{display:grid;gap:.5rem;padding:.4rem .5rem 0;counter-reset:lg}
+.lg li{counter-increment:lg;display:grid;grid-template-columns:1.75rem minmax(0,1fr);gap:.6rem;align-items:start;font-size:.9375rem;line-height:1.45}
+.lg li::before{content:counter(lg);display:grid;place-items:center;width:1.75rem;height:1.75rem;border:1.5px solid var(--line);border-radius:50%;background:var(--surface);font:600 .8125rem/1 var(--mono);color:var(--ink)}
+.lg b{display:block}
+.plan figcaption{padding:.8rem .5rem 0}
+@media (min-width:600px){.plan{padding:1rem 1rem 1.1rem}}
+/* Pointing at a legend row marks its balloon on the drawing */
+.plan:has(.lg li:nth-child(1):hover) .b1 circle,
+.plan:has(.lg li:nth-child(2):hover) .b2 circle,
+.plan:has(.lg li:nth-child(3):hover) .b3 circle,
+.plan:has(.lg li:nth-child(4):hover) .b4 circle,
+.plan:has(.lg li:nth-child(5):hover) .b5 circle{fill:var(--line)}
+.plan:has(.lg li:nth-child(1):hover) .b1 text,
+.plan:has(.lg li:nth-child(2):hover) .b2 text,
+.plan:has(.lg li:nth-child(3):hover) .b3 text,
+.plan:has(.lg li:nth-child(4):hover) .b4 text,
+.plan:has(.lg li:nth-child(5):hover) .b5 text{fill:var(--surface)}
+
+/* Figure AI */
+.two{display:grid;gap:clamp(1.5rem,4vw,3.25rem);align-items:start}
+@media (min-width:900px){.two{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.gens-fig{margin-top:1.5rem;padding:1.4rem 1.1rem 1rem}
+.gens{display:grid;grid-template-columns:repeat(3,1fr)}
+.gens li{position:relative;border-top:1.5px solid var(--line);padding:.7rem .6rem 0 0;font-size:.9375rem;font-weight:500;line-height:1.3}
+.gens li::before{content:"";position:absolute;left:0;top:-7px;width:1.5px;height:13px;background:var(--line)}
+.gens li:last-child::after{content:"";position:absolute;right:0;top:-5px;width:10px;height:8px;background:var(--line);clip-path:polygon(100% 50%,0 0,0 100%)}
+.gens-fig figcaption{margin-top:.9rem}
+.ruled li{padding:.85rem 0;border-top:1px solid var(--rule);max-width:70ch}
+.ruled li:first-child{border-top:0;padding-top:0}
+.ruled li:last-child{padding-bottom:0}
+
+/* YoCam intro */
+.yo-intro{display:grid;gap:1.5rem;align-items:start}
+@media (min-width:900px){.yo-intro{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}}
+.lead{font-size:clamp(1.125rem,1rem + .5vw,1.3125rem);line-height:1.5;max-width:60ch;text-wrap:pretty}
+.parts > div{display:grid;grid-template-columns:6.25rem minmax(0,1fr);gap:0 .75rem;padding:.6rem 0;border-bottom:1px solid var(--rule)}
+.parts dt{font-family:var(--mono);font-size:.8125rem;line-height:1.95;color:var(--muted)}
+.parts dd{font-size:1rem;line-height:1.5}
+.parts.cols{display:grid;gap:0 clamp(1.5rem,3vw,2.5rem)}
+@media (min-width:900px){.parts.cols{grid-template-columns:1fr 1fr}}
+.parts.wide-dt > div{grid-template-columns:8.5rem minmax(0,1fr)}
+@media (max-width:420px){.parts.wide-dt > div{grid-template-columns:1fr}.parts.wide-dt dt{line-height:1.5}}
+
+/* YoCam architecture: real text in HTML so it never shrinks. Base layout is a vertical bus; wide containers get a horizontal bus. */
+.arch-fig{container-type:inline-size;container-name:arch;padding:.75rem .6rem .9rem}
+@media (min-width:600px){.arch-fig{padding:1rem}}
+.arch-ctl{display:none;flex-wrap:wrap;align-items:stretch;gap:.6rem}
+.js .arch-ctl{display:flex}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5px;flex:1 1 18rem;border:1.5px solid var(--line);background:var(--line)}
+.seg-b{min-height:2.75rem;padding:.45rem .6rem;border:0;background:var(--surface);color:var(--line);font:600 .9375rem/1.2 var(--text);cursor:pointer;transition:background-color var(--t-ui) var(--ease-out),color var(--t-ui) var(--ease-out)}
+.seg-b:hover{background:var(--grid)}
+.seg-b[aria-pressed="true"]{background:var(--line);color:var(--surface)}
+.seg-b:focus-visible{outline-offset:-4px;outline-color:var(--accent)}
+.seg-b[aria-pressed="true"]:focus-visible{outline-color:var(--surface)}
+.seg.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.arch-status{margin-top:.75rem;font-size:.9375rem;font-weight:500;line-height:1.45;max-width:78ch;min-height:5.8em}
+@media (max-width:699px){.sos-fig .arch-status,.flow-fig .arch-status{min-height:4.35em}}
+@media (min-width:700px){.arch-status{min-height:2.9em}}
+.arch{position:relative;margin-top:.9rem}
+.bus{position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--line);overflow:hidden}
+.pk{display:none;position:absolute;inset:0}
+.pk::before{content:"";position:absolute;left:2px;top:0;width:4px;height:14px;background:var(--surface)}
+.svcs{display:grid;gap:.6rem;padding-left:26px}
+.svc{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:stretch}
+.svc::before{content:"";position:absolute;left:-18px;top:1.3rem;width:18px;height:1.5px;background:var(--line)}
+.box{grid-column:1;grid-row:1;position:relative;min-width:0;display:flex;flex-direction:column;gap:.1rem;padding:.5rem .65rem .6rem;background:var(--surface);border:1.5px solid var(--line)}
+.box::after{content:"";position:absolute;inset:-1.5px;border:3px solid var(--accent);opacity:0;pointer-events:none}
+.nm{font:600 .9375rem/1.4 var(--mono);overflow-wrap:anywhere}
+.role{font-size:.8125rem;line-height:1.4;color:var(--muted)}
+.st{display:none;margin-top:.3rem;font:500 .8125rem/1.35 var(--mono);color:var(--accent)}
+.st b{display:inline-grid;place-items:center;width:1.25rem;height:1.25rem;margin-right:.35rem;background:var(--accent);color:var(--accent-ink);font:600 .75rem/1 var(--mono);vertical-align:-.15rem}
+.cd{display:block;height:6px;margin-top:.3rem;border:1px solid var(--accent)}
+.cd i{display:block;height:100%;background:var(--accent);transform-origin:0 50%}
+.dev{grid-column:2;grid-row:1;position:relative;display:flex;flex-direction:column;justify-content:center;gap:.5rem;padding-left:14px}
+.dev::before{content:"";position:absolute;left:0;top:50%;width:14px;height:1.5px;background:var(--ink)}
+.chip{position:relative;z-index:0;display:block;padding:.4rem .5rem;border:1.25px solid var(--ink);background:var(--surface);font:500 .8125rem/1 var(--mono);white-space:nowrap;text-align:center}
+.chip::after{content:"";position:absolute;z-index:-1;inset:3px -4px -4px 3px;border:1px dashed var(--muted);border-top:0;border-left:0}
+.chip::before{content:"";position:absolute;inset:-1.25px;border:3px solid var(--accent);opacity:0}
+.s-rec .box,.s-vis .box,.s-fus .box{min-height:5rem}
+.s-alr .box{min-height:7rem}
+.s-rec .box{border-color:var(--accent);border-width:2px}
+.s-rec .nm::before{content:"";display:inline-block;width:.55rem;height:.55rem;margin-right:.4rem;border-radius:50%;background:var(--accent)}
+.s-vis{margin-top:1.5rem}
+.ring{position:absolute;left:1.5rem;bottom:calc(100% + 1.5px);width:1.5px;height:2.1rem;background:var(--accent)}
+.ring::before{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:3px dotted var(--accent);background:var(--bg)}
+.ring::after{content:"frame ring";position:absolute;left:18px;top:50%;transform:translateY(-50%);font:500 .75rem/1 var(--mono);color:var(--accent);white-space:nowrap}
+.bus-l{display:flex;align-items:center;gap:.6rem;margin-top:.7rem;font:400 .8125rem/1.45 var(--mono);color:var(--ink)}
+.bus-l i{flex:none;width:1.6rem;height:8px;background:var(--line)}
+.key{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;margin-top:.5rem;font-size:.8125rem;line-height:1.45;color:var(--muted)}
+.key .chip{display:inline-block;margin-right:.6rem;color:var(--ink)}
+/* Scenario states */
+[data-scn="vision"] .on-vision,[data-scn="crash"] .on-crash{display:block}
+[data-scn="vision"] .s-vis .box{border-style:dashed;border-color:var(--muted);background-image:repeating-linear-gradient(135deg,var(--hatch) 0 1px,transparent 1px 9px)}
+[data-scn="vision"] .s-vis .nm{text-decoration:line-through;text-decoration-thickness:1.5px}
+[data-scn="vision"] .s-vis .role{color:var(--ink)}
+[data-scn="vision"] .s-rec .box::after,
+[data-scn="crash"] .s-sen .box::after,
+[data-scn="crash"] .s-fus .box::after,
+[data-scn="crash"] .s-alr .box::after,
+[data-scn="crash"] .c-imu::before,
+[data-scn="crash"] .c-phone::before{opacity:1}
+/* Walkthrough: all three are readable without scripting; with scripting only the chosen one shows */
+.walk{display:grid;gap:1.25rem;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--rule)}
+.walk h4{font:600 .8125rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--line)}
+.walk ol{display:grid;gap:.55rem;margin-top:.55rem;counter-reset:w}
+.walk li{counter-increment:w;display:grid;grid-template-columns:1.4rem minmax(0,1fr);gap:.5rem;font-size:.9375rem;line-height:1.5}
+.walk li::before{content:counter(w);display:grid;place-items:center;width:1.4rem;height:1.4rem;margin-top:.1rem;border:1.25px solid var(--line);font:600 .8125rem/1 var(--mono);color:var(--ink)}
+.js [data-scn="normal"] .walk-i:not([data-for="normal"]),
+.js [data-scn="vision"] .walk-i:not([data-for="vision"]),
+.js [data-scn="crash"] .walk-i:not([data-for="crash"]),
+.js [data-scn="sends"] .walk-i:not([data-for="sends"]),
+.js [data-scn="silent"] .walk-i:not([data-for="silent"]){display:none}
+.arch-fig figcaption{margin-top:1rem;max-width:84ch}
+@container arch (min-width:820px){
+  .bus{left:0;right:0;top:auto;bottom:0;width:auto;height:8px}
+  .pk::before{left:0;top:2px;width:14px;height:4px}
+  .svcs{grid-template-columns:minmax(0,1fr) 1.75rem repeat(6,minmax(0,1fr));gap:.5rem;padding:0 0 22px}
+  .svc{grid-template-columns:minmax(0,1fr);grid-template-rows:4.75rem 1fr}
+  .svc::before{left:50%;top:auto;bottom:-14px;width:1.5px;height:14px}
+  .s-vis{grid-column:3;margin-top:0}
+  .svc .box{grid-column:1;grid-row:2;min-height:8.25rem;padding:.5rem .4rem .55rem}
+  .nm{font-size:.8125rem}
+  .dev{grid-column:1;grid-row:1;flex-direction:row;flex-wrap:wrap;align-content:flex-end;align-items:flex-end;justify-content:center;gap:.45rem .4rem;padding:0 0 12px}
+  .dev::before{left:50%;top:auto;bottom:0;width:1.5px;height:12px}
+  .chip{padding:.35rem .3rem;font-size:.75rem}
+  .ring{left:auto;right:calc(100% + 1.5px);bottom:auto;top:1.05rem;width:2.75rem;height:1.5px}
+  .ring::after{left:50%;top:auto;bottom:20px;transform:translateX(-50%)}
+  .walk{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem 2rem}
+  .js .walk{grid-template-columns:minmax(0,1fr)}
+  .js .walk ol{grid-template-columns:repeat(4,minmax(0,1fr));gap:.55rem 1.5rem}
+}
+
+/* Rakshak SOS flow: three lanes, stacked by default and side by side in wide containers. Text is HTML, so it never shrinks. */
+.sos-fig,.flow-fig{container-type:inline-size;padding:.75rem .6rem .9rem}
+.sos-fig{container-name:sos}
+.flow-fig{container-name:flow}
+@media (min-width:600px){.sos-fig,.flow-fig{padding:1rem}}
+.lanes{display:grid;gap:1.1rem;margin-top:.9rem}
+.lane{display:grid;gap:.5rem;align-content:start;min-width:0}
+.lane h4{padding-bottom:.3rem;border-bottom:1.5px solid var(--line);font:600 .8125rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--line)}
+.lane ol{display:grid;gap:.5rem}
+.lb,.fb{position:relative;display:flex;flex-direction:column;gap:.1rem;min-width:0;padding:.5rem .65rem .6rem;background:var(--surface);border:1.5px solid var(--line)}
+.lb.loc{border-style:dashed}
+.lb::after{content:"";position:absolute;inset:-1.5px;border:3px solid var(--accent);opacity:0;pointer-events:none}
+.lb.loc::after{border-style:dashed}
+.lb .up{display:none}
+.lt{display:block;font-size:.9375rem;font-weight:600;line-height:1.4}
+.lb .role{display:block}
+.n{display:inline-grid;place-items:center;width:1.25rem;height:1.25rem;margin-right:.4rem;background:var(--line);color:var(--surface);font:600 .75rem/1 var(--mono);vertical-align:-.15rem}
+.on-sends,.on-silent{display:none}
+[data-scn="sends"] .on-sends,[data-scn="silent"] .on-silent{display:block}
+[data-scn="sends"] .x-send::after,
+[data-scn="silent"] .x-pre::after,
+.sos-fig .x-srv::after,
+.sos-fig .x-crew::after{opacity:1}
+[data-scn="silent"] .x-send{border-color:var(--muted);background-image:repeating-linear-gradient(135deg,var(--hatch) 0 1px,transparent 1px 9px)}
+.sw{display:inline-block;width:1.6rem;height:.9rem;margin-right:.5rem;border:1.5px solid var(--line);background:var(--surface);vertical-align:-.1rem}
+.sw.loc{border-style:dashed}
+.sos-fig figcaption,.flow-fig figcaption{margin-top:1rem;max-width:84ch}
+@container sos (min-width:820px){
+  .lanes{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto repeat(3,auto);gap:.9rem 2rem}
+  .lane{grid-row:1 / -1;grid-template-rows:auto repeat(3,minmax(5.75rem,auto));gap:.9rem}
+  .lane ol{grid-row:2 / -1;grid-template-rows:repeat(3,minmax(5.75rem,auto));gap:.9rem}
+  .r1{grid-row:1}
+  .r2{grid-row:2}
+  .r3{grid-row:3}
+  /* Connectors. Down a lane: the next step on the same device. Across lanes: dashed, because the phone and the server are not yet connected end to end. */
+  .lb.dn::before,.lb .up{content:"";display:block;position:absolute;left:1.25rem;bottom:calc(100% + 1.5px);width:0;height:.9rem;border-left:1.5px solid var(--line)}
+  .lb .up{border-left-style:dashed}
+  .lb.lf::before{content:"";position:absolute;right:calc(100% + 1.5px);top:1.25rem;width:2rem;height:0;border-top:1.5px dashed var(--line)}
+  .walk{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem 2rem}
+  .js .walk{grid-template-columns:minmax(0,1fr)}
+  .js .walk ol{grid-template-columns:repeat(4,minmax(0,1fr));gap:.55rem 1.5rem}
+}
+@supports (grid-template-rows:subgrid){
+  @container sos (min-width:820px){
+    .lane,.lane ol{grid-template-rows:subgrid}
+  }
+}
+
+/* Tansh: one request, three ways to deliver it */
+.flow-fig .arch-status{display:none}
+.js .flow-fig .arch-status{display:block}
+.flow{display:grid;gap:.6rem;margin-top:.9rem}
+.fl-br{display:grid;gap:.6rem;margin-left:.75rem;padding-left:1rem;border-left:1.5px solid var(--line)}
+.js [data-scn="direct"] .b-direct,
+.js [data-scn="remux"] .b-remux,
+.js [data-scn="encode"] .b-enc{outline:3px solid var(--accent);outline-offset:-1.5px}
+@container flow (min-width:820px){
+  .flow{grid-template-columns:minmax(0,3fr) minmax(0,7fr) minmax(0,2.4fr);gap:0 2.5rem;align-items:center}
+  .fl-br{margin:0;padding:0;border:0}
+  .fl-br li::before,.fl-br li::after{content:"";position:absolute;top:1.25rem;width:1rem;height:calc(100% + .6rem + 3px);border:solid var(--line)}
+  .fl-br li::before{left:calc(-1rem - 1.5px);border-width:1.5px 0 0 1.5px}
+  .fl-br li::after{right:calc(-1rem - 1.5px);border-width:1.5px 1.5px 0 0}
+  .fl-br li:last-child::before,.fl-br li:last-child::after{height:0;border-left-width:0;border-right-width:0}
+  .fl-in::before,.fl-out::before{content:"";position:absolute;top:50%;width:1.5rem;height:0;border-top:1.5px solid var(--line)}
+  .fl-in::before{left:calc(100% + 1.5px)}
+  .fl-out::before{right:calc(100% + 1.5px)}
+}
+/* Thermal hysteresis strip */
+.therm{margin-top:.75rem;max-width:26rem}
+.th{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.th span{display:grid;place-items:center;min-height:3rem;padding:.35rem .3rem;font:500 .8125rem/1.3 var(--mono);text-align:center}
+.th .th-mid{border-inline:2px solid var(--accent);background-image:repeating-linear-gradient(135deg,var(--hatch) 0 1px,transparent 1px 9px)}
+.therm figcaption{margin-top:.4rem}
+
+/* How it is built */
+.built > li{display:grid;gap:.4rem 2rem;padding:1.15rem 0;border-top:1px solid var(--rule)}
+.built > li:first-child{border-top:0;padding-top:0}
+.built p{max-width:64ch;text-wrap:pretty}
+.built .ref{display:block;margin-top:.35rem;font:400 .8125rem/1.5 var(--mono);color:var(--muted)}
+@media (min-width:860px){.built > li{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}}
+.slots-fig{margin-top:.75rem}
+.slots-fig figcaption{margin-top:.4rem}
+.slots{width:7.5rem;height:7.5rem}
+.slots rect{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.slots .wr rect{fill:var(--accent);stroke:var(--accent)}
+.slots .wr path{fill:var(--accent)}
+.slots .wr{transform-box:view-box;transform-origin:50% 50%}
+
+/* Counts */
+.counts{grid-template-columns:1fr 1fr}
+.counts dt{letter-spacing:.02em;text-transform:none;font-size:.8125rem;line-height:1.4}
+.counts b{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,1.5rem + 1.6vw,2.5rem);line-height:1;color:var(--ink)}
+.counts > div{display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:.25rem;padding:.75rem .85rem}
+@media (min-width:700px){.counts{grid-template-columns:repeat(3,1fr)}}
+
+.next li{position:relative;padding:.7rem 0 .7rem 1.6rem;border-top:1px solid var(--rule);max-width:72ch}
+.next li:first-child{border-top:0;padding-top:0}
+.next li::before{content:"";position:absolute;left:0;top:1.35rem;width:.9rem;height:1.5px;background:var(--accent)}
+.next li:first-child::before{top:.65rem}
+.yo-note{margin-top:1.75rem}
+
+/* Other work: a ruled ledger, name and status on the left, the detail on the right */
+.led > li{display:grid;gap:.75rem 2.5rem;padding:1.5rem 0;border-top:1px solid var(--rule)}
+.led > li:first-child{border-top:0;padding-top:0}
+.led > li:last-child{padding-bottom:0}
+.led h3{font-size:1.625rem}
+.tag{display:inline-block;margin-top:.55rem;padding:.3rem .5rem;border:1.25px solid var(--line);color:var(--line);font:500 .8125rem/1.25 var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.led .side p{margin-top:.55rem;font-size:.9375rem;line-height:1.45;color:var(--muted)}
+.led .what{font-size:1.0625rem;max-width:62ch;text-wrap:pretty}
+.led dl{margin-top:.8rem;max-width:66ch}
+.led dl > div{display:grid;gap:.1rem .9rem;padding:.6rem 0;border-top:1px dashed var(--rule)}
+.led dt{font-family:var(--mono);font-size:.8125rem;line-height:1.95;color:var(--muted)}
+.led dd{line-height:1.5}
+.led dd.mono{font-family:var(--text);font-size:.9375rem;line-height:1.5;color:var(--muted)}
+@media (min-width:520px){.led dl > div{grid-template-columns:7rem minmax(0,1fr)}}
+@media (min-width:900px){.led > li{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}}
+
+/* Background */
+.hist > li{display:grid;gap:.15rem 1.5rem;padding:.95rem 0;border-top:1px solid var(--rule)}
+.hist > li:first-child{border-top:0;padding-top:0}
+.hist h3{font-size:1.375rem}
+.hist .org{color:var(--muted);font-size:.9375rem}
+.hist .did{max-width:66ch;margin-top:.35rem}
+@media (min-width:700px){.hist > li{grid-template-columns:12rem minmax(0,1fr)}.hist .meta{padding-top:.3rem}}
+.bg-grid{display:grid;gap:2rem clamp(1.5rem,4vw,3.25rem);margin-top:clamp(1.75rem,3vw,2.5rem);align-items:start}
+@media (min-width:900px){.bg-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.bg-grid h3{padding-bottom:.45rem;border-bottom:1.5px solid var(--line)}
+.bg-grid h3:not(:first-child){margin-top:1.75rem}
+.recs > li{padding:.6rem 0;border-bottom:1px solid var(--rule)}
+.recs span{display:block;font-size:.9375rem;color:var(--muted)}
+/* Skills fold away on phones (the script closes them there); open everywhere else and without scripting */
+.bg-grid summary{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding-bottom:.45rem;border-bottom:1.5px solid var(--line);list-style:none;cursor:pointer}
+.bg-grid summary::-webkit-details-marker{display:none}
+.bg-grid summary h3{padding:0;border:0}
+.bg-grid summary::after{content:"Show";font:500 .8125rem/1 var(--mono);color:var(--line)}
+.bg-grid details[open] > summary::after{content:"Hide"}
+.bg-grid details > dl{margin-top:.5rem}
+
+/* Contact */
+.ask{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,1.1rem + 1.8vw,2.25rem);line-height:1.1}
+.mail{display:inline-block;margin-top:.5rem;font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,5.4vw,3.5rem);line-height:1.1;letter-spacing:.005em;overflow-wrap:anywhere;color:var(--accent);text-decoration-thickness:2px;text-underline-offset:.12em}
+.mail:hover{color:var(--ink);text-decoration-thickness:3px}
+.contact .btns{margin-top:1.4rem}
+.contact .prose{margin-top:1.4rem}
+
+footer{width:min(1120px,calc(100% - 2*var(--gutter)));margin:0 auto;padding:1.75rem 0 3rem;font-size:.9375rem;color:var(--muted)}
+
+/* Wide screens: the top bar turns into a sticky section index */
+@media (min-width:1280px){
+  .page{display:grid;grid-template-columns:12rem minmax(0,1fr);column-gap:2rem;max-width:1420px;margin:0 auto;padding-inline:var(--gutter)}
+  .top{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;border-bottom:0;border-right:1px solid var(--rule)}
+  .top-in{width:auto;min-height:100%;margin:0;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:0;padding:2.25rem 1.25rem 1.75rem 0}
+  .name{margin:0;padding:0;font-size:1.75rem;line-height:1.1}
+  .top nav{margin-top:1.25rem}
+  .top nav ul{flex-direction:column;gap:0}
+  .top nav a{position:relative;padding:.5rem 0 .5rem 1.75rem}
+  .top nav a::before{content:"";position:absolute;left:0;top:50%;width:1.25rem;height:1.5px;background:var(--muted);transform:scaleX(.4);transform-origin:0 50%;transition:transform var(--t-ui) var(--ease-out)}
+  .top nav a[aria-current]{box-shadow:none;font-weight:600}
+  .top nav a[aria-current]::before{background:var(--accent);transform:none}
+  .rail-mail{display:inline-block;margin-top:auto;padding-top:1.25rem;font-size:.9375rem;font-weight:500}
+  .theme{margin-top:1.25rem}
+  .sheet,footer{width:100%;max-width:1120px;margin-inline:0}
+}
+
+/* Motion. Everything is in its final state without it. */
+@keyframes plot{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{from{opacity:0;transform:scale(.8)}}
+@keyframes pk-y{from{transform:translateY(-6%)}to{transform:translateY(100%)}}
+@keyframes pk-x{from{transform:translateX(-4%)}to{transform:translateX(100%)}}
+@keyframes drain{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@keyframes step{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+  /* Hero drawing plots itself once, in under 1.6 seconds */
+  .plan .draw{stroke-dasharray:1;animation:plot var(--dur,450ms) var(--ease-in-out) var(--at,0ms) both}
+  .plan .fade{animation:fade 300ms var(--ease-out) var(--at,0ms) both}
+  .plan .pop{transform-box:fill-box;transform-origin:center;animation:pop 220ms var(--ease-out) var(--at,0ms) both}
+  /* Content is never hidden. Only each sheet's heading rule draws itself in. */
+  .js .sheet-head.rv::after{transform:scaleX(0)}
+  .js .sheet-head.rv.in::after{transform:none;transition:transform var(--t-draw) var(--ease-in-out) 120ms}
+  .slots.in .wr{animation:step 1.6s steps(8) 200ms 1 both}
+  /* Messages cross the bus twice when a scenario is chosen, then stop. Nothing loops. */
+  .js .arch-fig:not([data-scn=""]) .pk{display:block;animation:pk-y 1.8s linear 2 both paused}
+  .js .arch-fig:not([data-scn=""]) .pk:nth-child(2){animation-delay:-.6s}
+  .js .arch-fig:not([data-scn=""]) .pk:nth-child(3){animation-delay:-1.2s}
+  .js .arch-fig[data-scn="crash"] .pk:nth-child(n+2){display:none}
+  .js .arch-fig.is-live .pk{animation-play-state:running}
+  /* Crash sequence plays once, in about 2.7 seconds, and holds its last frame */
+  .js .arch-fig[data-scn="crash"] .s-sen .box::after,
+  .js .arch-fig[data-scn="crash"] .c-imu::before,
+  .js .arch-fig[data-scn="crash"] .s-sen .st{animation:fade 260ms var(--ease-out) 100ms both}
+  .js .arch-fig[data-scn="crash"] .s-fus .box::after,
+  .js .arch-fig[data-scn="crash"] .s-fus .st{animation:fade 260ms var(--ease-out) 500ms both}
+  .js .arch-fig[data-scn="crash"] .s-alr .box::after,
+  .js .arch-fig[data-scn="crash"] .s-alr .st{animation:fade 260ms var(--ease-out) 900ms both}
+  .js .arch-fig[data-scn="crash"] .cd i{animation:drain 1.4s linear 1000ms both}
+  .js .arch-fig[data-scn="crash"] .s-alr .st.late,
+  .js .arch-fig[data-scn="crash"] .c-phone::before{animation:fade 260ms var(--ease-out) 2400ms both}
+  .js .arch-fig[data-scn="vision"] .s-rec .box::after,
+  .js .arch-fig[data-scn="vision"] .st{animation:fade 260ms var(--ease-out) 120ms both}
+  /* SOS flow plays once when it is first seen, and again when a scenario is chosen: about 2.6 seconds */
+  .js .sos-fig.seen:not([data-scn=""]) .cd i{animation:drain 1.2s linear 300ms both}
+  .js .sos-fig.seen[data-scn="silent"] .x-pre::after{animation:fade 260ms var(--ease-out) 300ms both}
+  .js .sos-fig.seen[data-scn="sends"] .x-send::after,
+  .js .sos-fig.seen[data-scn="silent"] .x-send .on-silent{animation:fade 260ms var(--ease-out) 1500ms both}
+  .js .sos-fig.seen:not([data-scn=""]) .x-srv::after{animation:fade 260ms var(--ease-out) 1900ms both}
+  .js .sos-fig.seen:not([data-scn=""]) .x-crew::after{animation:fade 260ms var(--ease-out) 2300ms both}
+}
+@container arch (min-width:820px){
+  @media (prefers-reduced-motion:no-preference){
+    .js .arch-fig:not([data-scn=""]) .pk{animation-name:pk-x}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media (forced-colors:active){
+  .drawing{background-image:none}
+  .box::after,.lb::after,.chip::before{border-color:Highlight}
+  .bus,.bus-l i{background:CanvasText}
+}
+@media print{
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
+    color-scheme:light;
+    --bg:#fff; --surface:#fff; --ink:#000; --muted:#333; --line:#000; --accent:#000; --accent-ink:#fff; --rule:#999; --grid:#fff; --hatch:#bbb;
+  }
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .sheet-head::after{transform:none!important}
+  .top,.skip,.arch-ctl,.arch-status,.pk,.st,.hero .btns,.bg-grid summary::after{display:none!important}
+  body{font-size:10.5pt}
+  .page{display:block;padding:0}
+  .sheet,footer{width:100%;max-width:none;margin:0}
+  .sheet{border:0;border-top:1px solid #000;padding:1rem 0}
+  .drawing{background-image:none;border-color:#999}
+  .hero-grid,.two,.yo-intro,.bg-grid,.parts.cols,.walk,.built > li,.led > li{display:block}
+  .hero-grid > * + *,.two > * + *,.yo-intro > * + *,.bg-grid > * + *,.walk-i + .walk-i,.led .side + div{margin-top:1rem}
+  .walk-i{display:block!important}
+  .fb{outline:0!important}
+  .note a[href^="mailto"]::after{content:" (ansh2004anshkumar@gmail.com)"}
+  .plan{display:grid;grid-template-columns:17rem minmax(0,1fr);gap:.5rem 1rem;align-items:start;padding:.75rem;break-inside:avoid}
+  .plan figcaption{grid-column:1 / -1;padding:0}
+  .lg{padding:0}
+  .svc,.lb,.fb,.led > li,.built > li,.hist > li,.tb{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  a{color:#000}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;word-break:break-all}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+<header class="top">
+  <div class="top-in">
+    <a class="name" href="#top">Ansh Kumar</a>
+    <button class="theme" id="theme" type="button" hidden>Dark mode</button>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#figure">Figure AI</a></li>
+        <li><a href="#yocam">YoCam</a></li>
+        <li><a href="#rakshak">Rakshak</a></li>
+        <li><a href="#tansh">Tansh</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="rail-mail" href="mailto:ansh2004anshkumar@gmail.com">Email me</a>
+  </div>
+</header>
+
+<div class="col">
+<main id="main">
+
+<!-- Summary -->
+<section class="sheet hero" id="top" aria-labelledby="h-top">
+  <div class="hero-grid">
+    <div>
+      <h1 id="h-top">
+        <span class="who">Ansh Kumar<span class="vh">.</span> <small>Helix Data Creator, Figure AI</small></span>
+        <span class="claim">Top of the weekly data creator leaderboard at Figure AI, and builder of an AI dashcam that runs in a car.</span>
+      </h1>
+      <p class="lede">At Figure AI I wear the capture hardware that records the human demonstrations the Helix model learns from. Each time that hardware changed, I was productive on day one. On my own time I designed a circuit board for the Raspberry Pi 5 and built YoCam on it: a dashcam that keeps recording even when its AI fails.</p>
+      <p class="btns">
+        <a class="btn primary" href="mailto:ansh2004anshkumar@gmail.com">Email me</a>
+        <a class="btn" href="#yocam">See how YoCam works</a>
+      </p>
+    </div>
+
+    <figure class="plan drawing">
+      <svg viewBox="22 8 488 314" role="img" aria-labelledby="plan-t plan-d">
+        <title id="plan-t">Plan view of YoCam in a car</title>
+        <desc id="plan-d">A car seen from above with five numbered parts wired together: 1, the Raspberry Pi 5 with the custom HAT board; 2, the IMU; 3, the GPS receiver; 4, the camera; 5, the car's OBD-II port. The numbers match the list below the drawing.</desc>
+        <!-- car, front to the left -->
+        <path class="ctr fade" style="--at:480ms" d="M62 165H498"/>
+        <path class="k draw" pathLength="1" style="--dur:700ms" d="M138 93H412C444 93 470 111 470 139V191C470 219 444 237 412 237H138C112 237 90 219 90 193V137C90 111 112 93 138 93Z"/>
+        <path class="k2 draw" pathLength="1" style="--at:240ms" d="M132 107C124 135 124 195 132 223"/>
+        <path class="k2 draw" pathLength="1" style="--at:280ms" d="M192 109C180 135 180 195 192 221"/>
+        <path class="k2 draw" pathLength="1" style="--at:320ms" d="M192 109L225 115C218 140 218 190 225 215L192 221"/>
+        <path class="k2 draw" pathLength="1" style="--at:360ms" d="M225 115H365M225 215H365"/>
+        <path class="k2 draw" pathLength="1" style="--at:400ms" d="M398 109L365 115C371 140 371 190 365 215L398 221"/>
+        <path class="k2 draw" pathLength="1" style="--at:440ms" d="M398 109C408 135 408 195 398 221"/>
+        <path class="k2 draw" pathLength="1" style="--at:440ms" d="M197 93L192 82H205L208 93M197 237L192 248H205L208 237"/>
+        <g class="fade" style="--at:520ms">
+          <path class="hid" d="M140 96H182V108H140ZM140 222H182V234H140ZM385 96H427V108H385ZM385 222H427V234H385Z"/>
+          <circle class="hid" cx="243" cy="198" r="10"/>
+          <path class="dir-a" d="M88 38H40"/><path class="dir-h" d="M34 38L46 32V44Z"/>
+          <text class="dir" x="34" y="66">FRONT</text>
+        </g>
+        <!-- YoCam parts, drawn larger than life so they can be read -->
+        <path class="fov fade" style="--at:900ms" d="M200 165L112 124M200 165L112 206"/>
+        <path class="wire draw" pathLength="1" style="--at:900ms;--dur:300ms" d="M207 157V138M194 204V138M222 118H246M222 132H236V146H247.5"/>
+        <g class="pop" style="--at:750ms"><rect class="cmp" x="188" y="112" width="34" height="26"/><rect class="cmp-in" x="193" y="117" width="24" height="16"/></g>
+        <g class="pop" style="--at:800ms"><rect class="cmp" x="246" y="108" width="16" height="16"/><path class="cmp-in" d="M254 111V121M249 116H259"/></g>
+        <g class="pop" style="--at:850ms"><circle class="cmp" cx="256" cy="146" r="8.5"/><circle class="cmp-in" cx="256" cy="146" r="2.5"/></g>
+        <g class="pop" style="--at:900ms"><rect class="cmp" x="200" y="157" width="14" height="16"/><circle class="cmp-in" cx="204.5" cy="165" r="2.5"/></g>
+        <g class="pop" style="--at:950ms"><path class="cmp" d="M186 204H208L204 216H190Z"/></g>
+        <!-- leaders and balloons, numbered clockwise -->
+        <path class="ld draw" pathLength="1" style="--at:1050ms;--dur:260ms" d="M200 110L158.8 47.4"/>
+        <path class="ld draw" pathLength="1" style="--at:1090ms;--dur:260ms" d="M254 106L260.2 49.9"/>
+        <path class="ld draw" pathLength="1" style="--at:1130ms;--dur:260ms" d="M262.5 140L339.8 46.3"/>
+        <path class="ld draw" pathLength="1" style="--at:1170ms;--dur:260ms" d="M207 175L255.5 283.4"/>
+        <path class="ld draw" pathLength="1" style="--at:1210ms;--dur:260ms" d="M197 218L166.7 283.5"/>
+        <g class="bl b1 pop" style="--at:1180ms"><circle cx="150" cy="34" r="16"/><text x="150" y="41.5">1</text></g>
+        <g class="bl b2 pop" style="--at:1220ms"><circle cx="262" cy="34" r="16"/><text x="262" y="41.5">2</text></g>
+        <g class="bl b3 pop" style="--at:1260ms"><circle cx="350" cy="34" r="16"/><text x="350" y="41.5">3</text></g>
+        <g class="bl b4 pop" style="--at:1300ms"><circle cx="262" cy="298" r="16"/><text x="262" y="305.5">4</text></g>
+        <g class="bl b5 pop" style="--at:1340ms"><circle cx="160" cy="298" r="16"/><text x="160" y="305.5">5</text></g>
+      </svg>
+      <ol class="lg">
+        <li><span><b>Raspberry Pi 5 + custom HAT board</b> The hub. My board handles power, sensors and I/O.</span></li>
+        <li><span><b>IMU</b> Senses the g-force spike of a crash.</span></li>
+        <li><span><b>GPS</b> Gives the location for an emergency call.</span></li>
+        <li><span><b>Camera</b> Feeds the recorder and the on-device AI.</span></li>
+        <li><span><b>OBD-II port</b> Live vehicle data from the car.</span></li>
+      </ol>
+      <figcaption>Plan view of YoCam in a car. Illustrative, not to scale.</figcaption>
+    </figure>
+  </div>
+
+  <dl class="tb four">
+    <div><dt>Role</dt><dd>Helix Data Creator <span>Figure AI, contract via Aerotek, Aug 2026 to present</span></dd></div>
+    <div><dt>Based in</dt><dd>San Jose, CA <span>Open to travel</span></dd></div>
+    <div><dt>Looking for</dt><dd>Hands-on robotics roles <span>Operations, data quality, hardware</span></dd></div>
+    <div><dt>Contact</dt><dd><a href="mailto:ansh2004anshkumar@gmail.com">ansh2004anshkumar@gmail.com</a> <span><a href="https://www.linkedin.com/in/ansh-kumar-252ab0281" rel="noopener">LinkedIn</a> and <a href="https://github.com/Ansh-0811" rel="noopener">GitHub</a></span></dd></div>
+  </dl>
+</section>
+
+<!-- Figure AI -->
+<section class="sheet" id="figure" aria-labelledby="h-figure">
+  <header class="sheet-head rv">
+    <h2 id="h-figure">Figure AI</h2>
+    <p class="meta">Helix Data Creator. Contract via Aerotek. San Jose, CA. Aug 2026 to present.</p>
+  </header>
+  <div class="two">
+    <div class="rv">
+      <p class="lead">Top of the weekly data creator leaderboard, and recognised as a high performer at the daily stand-up.</p>
+      <p class="prose" style="margin-top:.9rem">I wear data-capture hardware and record the human demonstrations that Figure's Helix model learns from.</p>
+      <figure class="gens-fig drawing">
+        <ol class="gens" role="list" aria-label="Capture hardware I have worked on, oldest to newest">
+          <li>Full-body sensor systems</li>
+          <li>Several updated versions</li>
+          <li>VR headsets</li>
+        </ol>
+        <figcaption>Capture hardware I have worked on, oldest to newest.</figcaption>
+      </figure>
+    </div>
+    <ul class="ruled rv">
+      <li>The capture hardware has changed several times. I was productive on each version from the first day, and I worked through the early-rollout problems on my own.</li>
+      <li>When a problem is outside the procedures, I work out the fix, then send the field specialist a detailed report of what happened and how I solved it. I file tickets in Jira.</li>
+      <li>I coach coworkers on raising their recording uptime.</li>
+      <li>As Gear Runner, an added duty, I pack and deliver equipment for off-site collection, run check-in/check-out and inventory, help creators on site, and keep field specialists updated.</li>
+    </ul>
+  </div>
+  <p class="note rv" style="margin-top:1.5rem">I keep the details of this work general because it is confidential.</p>
+</section>
+
+<!-- YoCam -->
+<section class="sheet case" id="yocam" aria-labelledby="h-yocam">
+  <header class="sheet-head rv">
+    <h2 id="h-yocam">YoCam</h2>
+    <p class="meta">AI dashcam and driver safety system. Independent project, 2026.</p>
+  </header>
+
+  <div class="yo-intro rv">
+    <div>
+      <p class="lead">YoCam is working and tested on real hardware. It is installed in a car on a Raspberry Pi 5 with a custom HAT board that I designed and assembled, and it reads live vehicle data over OBD-II.</p>
+      <p class="prose" style="margin-top:.9rem">It records video, runs AI models on the device to watch the road and the driver, detects crashes, and can place an emergency call through a paired phone. The rule I built it around: the recording must never stop because something else broke.</p>
+    </div>
+    <div>
+      <dl class="tb">
+        <div><dt>Status</dt><dd>Working <span>Tested on real hardware in a car</span></dd></div>
+        <div><dt>Board</dt><dd>Custom Pi 5 HAT <span>Power, sensors and I/O</span></dd></div>
+        <div><dt>Car data</dt><dd>OBD-II, IMU, GPS</dd></div>
+        <div><dt>Software</dt><dd>Python <span>7 systemd services</span></dd></div>
+      </dl>
+      <p class="note" style="margin-top:.9rem">The repo is private. <a href="mailto:ansh2004anshkumar@gmail.com">Email me</a> and I'll walk you through the code and the board on a call.</p>
+    </div>
+  </div>
+
+  <div class="sub rv">
+    <h3>What it does</h3>
+    <dl class="parts cols">
+      <div><dt>Road</dt><dd>Vehicle detection (YOLOv8n on TFLite), lane detection and blind-spot warnings.</dd></div>
+      <div><dt>Driver</dt><dd>Driver attention from MediaPipe face landmarks, scored by rules.</dd></div>
+      <div><dt>Crash</dt><dd>Crash detection from the IMU, an alert, then an emergency call through a paired Bluetooth phone if the alert goes unconfirmed.</dd></div>
+      <div><dt>Voice</dt><dd>"Yo cam" voice commands (whisper.cpp). Spoken replies and crash announcements in a cloned voice (NeuTTS).</dd></div>
+      <div><dt>Review</dt><dd>A FastAPI dashboard, and offline video analyzers that export annotated clips.</dd></div>
+      <div><dt>Unattended</dt><dd>Starts on boot as systemd services and recovers by itself after power loss.</dd></div>
+    </dl>
+  </div>
+
+  <div class="sub rv">
+    <h3 id="h-arch">How the services work together</h3>
+    <figure class="arch-fig drawing" id="arch" data-scn="normal" aria-labelledby="h-arch">
+      <div class="arch-ctl">
+        <div class="seg" role="group" aria-label="Scenario shown in the diagram">
+          <button class="seg-b" type="button" data-set="normal" aria-pressed="true">Normal drive</button>
+          <button class="seg-b" type="button" data-set="vision" aria-pressed="false">Vision service fails</button>
+          <button class="seg-b" type="button" data-set="crash" aria-pressed="false">Crash detected</button>
+        </div>
+      </div>
+      <p class="arch-status" id="arch-status" role="status" aria-live="polite">Normal drive. Every service is running and the recorder is writing video.</p>
+
+      <div class="arch">
+        <div class="bus" aria-hidden="true"><i class="pk"></i><i class="pk"></i><i class="pk"></i></div>
+        <ul class="svcs" role="list" aria-label="YoCam services and the hardware each one talks to">
+          <li class="svc s-rec">
+            <div class="dev"><span class="chip">Camera</span></div>
+            <div class="box">
+              <span class="nm">recorder</span>
+              <span class="role">Writes video. Its own process.</span>
+              <span class="st on-vision">Still recording</span>
+            </div>
+          </li>
+          <li class="svc s-vis">
+            <div class="box">
+              <span class="ring" aria-hidden="true"></span>
+              <span class="nm">vision</span>
+              <span class="role">Driver and road AI. Reads frames from shared memory.</span>
+              <span class="st on-vision">Stopped</span>
+            </div>
+          </li>
+          <li class="svc s-sen">
+            <div class="dev"><span class="chip">OBD-II</span><span class="chip c-imu">IMU</span><span class="chip">GPS</span></div>
+            <div class="box">
+              <span class="nm">sensors</span>
+              <span class="role">Reads the car and motion data.</span>
+              <span class="st on-crash"><b>1</b>IMU spike</span>
+            </div>
+          </li>
+          <li class="svc s-fus">
+            <div class="box">
+              <span class="nm">fusion</span>
+              <span class="role">Combines signals. Detects crashes.</span>
+              <span class="st on-vision">Running without vision</span>
+              <span class="st on-crash"><b>2</b>Crash. Severity can only go up.</span>
+            </div>
+          </li>
+          <li class="svc s-alr">
+            <div class="dev"><span class="chip c-phone">Paired phone</span></div>
+            <div class="box">
+              <span class="nm">alerts</span>
+              <span class="role">Spoken warnings and the emergency call.</span>
+              <span class="st on-crash"><b>3</b>10-second window<span class="cd" aria-hidden="true"><i></i></span></span>
+              <span class="st on-crash late"><b>4</b>Emergency call</span>
+            </div>
+          </li>
+          <li class="svc s-api">
+            <div class="box">
+              <span class="nm">api</span>
+              <span class="role">Serves the dashboard.</span>
+            </div>
+          </li>
+          <li class="svc s-cal">
+            <div class="box">
+              <span class="nm">calibration</span>
+              <span class="role">Guided setup, step by step.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <p class="bus-l"><i aria-hidden="true"></i>ZeroMQ pub/sub bus. Every service publishes and subscribes here.</p>
+      <p class="key"><span><span class="chip" aria-hidden="true">GPS</span>Hardware in the car. The dashed edge is the simulated driver used for tests on a laptop.</span></p>
+
+      <div class="walk">
+        <div class="walk-i" data-for="normal">
+          <h4>Normal drive</h4>
+          <ol>
+            <li><span>The recorder reads the camera and writes video in its own process.</span></li>
+            <li><span>It shares each frame through a ring in shared memory. Only a small reference to the frame goes on the bus.</span></li>
+            <li><span>Vision reads frames from the ring. Sensors read OBD-II, the IMU and GPS.</span></li>
+            <li><span>Fusion combines both streams, and alerts speaks the warnings.</span></li>
+          </ol>
+        </div>
+        <div class="walk-i" data-for="vision">
+          <h4>Vision service fails</h4>
+          <ol>
+            <li><span>The vision process stops.</span></li>
+            <li><span>The recorder does not wait on it, so the video keeps recording.</span></li>
+            <li><span>The services are set up so that one stopping does not take the others down.</span></li>
+            <li><span>Crash detection still works, because an IMU spike is enough to trigger it.</span></li>
+          </ol>
+        </div>
+        <div class="walk-i" data-for="crash">
+          <h4>Crash detected</h4>
+          <ol>
+            <li><span>The IMU reports a g-force spike. That alone raises a crash alert.</span></li>
+            <li><span>Three other signals can only raise the severity: a speed drop from OBD-II, collision risk just before, and an extreme spike. Missing data never cancels the alert.</span></li>
+            <li><span>The alert opens a 10-second confirmation window. The diagram runs it faster.</span></li>
+            <li><span>If the alert goes unconfirmed, YoCam places an emergency call through the paired Bluetooth phone. The message it prepares includes the GPS location.</span></li>
+          </ol>
+        </div>
+      </div>
+      <figcaption>Drawn for this page to show the architecture; not a screenshot.</figcaption>
+    </figure>
+  </div>
+
+  <div class="sub rv">
+    <h3>How it is built</h3>
+    <ol class="built">
+      <li>
+        <div>
+          <h4>Video frames travel through shared memory, not the message bus.</h4>
+          <figure class="slots-fig">
+          <svg class="slots rv" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <g transform="rotate(0 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(45 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(90 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(135 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(180 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(225 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(270 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g transform="rotate(315 60 60)"><rect x="50" y="6" width="20" height="24"/></g>
+            <g class="wr"><rect x="50" y="6" width="20" height="24"/><path d="M60 36L54 48H66Z"/></g>
+          </svg>
+          <figcaption class="meta">8 slots shown. The filled slot is being written.</figcaption>
+          </figure>
+        </div>
+        <p>The recorder writes each camera frame into a ring of slots in shared memory, and the writer never waits for a reader. Each slot carries a sequence number that is odd while the slot is being written. A reader that catches a half-written frame sees the number change and reads again, so it never uses a torn frame.</p>
+      </li>
+      <li>
+        <h4>I hit a known CPython bug in shared memory and worked around it.</h4>
+        <p>A process that only attached to the shared memory would delete it when it exited, which destroyed the recorder's live buffer. I stopped attached processes from being tracked as owners, so only the owner can delete the memory, and the live previews reconnect by themselves after a recorder restart. <span class="ref">CPython issue bpo-38119</span></p>
+      </li>
+      <li>
+        <h4>Every hardware driver also has a simulated version.</h4>
+        <p>In the car, the real drivers run. The camera, OBD-II, GPS, IMU and phone each also have a simulated driver behind the same interface, so the whole system runs end to end on a laptop. The automated tests run against the simulated drivers, and the real drivers are tested by running the system in the car.</p>
+      </li>
+      <li>
+        <h4>A failed service does not take the rest down.</h4>
+        <p>The services are started so that one stopping leaves the others running, and the system reports a degraded state and carries on.</p>
+      </li>
+      <li>
+        <h4>Calibration is a state machine.</h4>
+        <p>Setup walks through steering, throttle, brake, the IMU and the cameras as explicit steps. Each step ends in one of four outcomes (success, retry, motion abort or fatal) and has a retry limit. If the car moves during setup, calibration stops and keeps what it has measured so far.</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="sub rv">
+    <h3>Size</h3>
+    <dl class="tb counts">
+      <div><dt>tests, in 67 test files</dt><dd><b>~1,130</b></dd></div>
+      <div><dt>hardware driver types, each real and simulated</dt><dd><b>5</b></dd></div>
+      <div><dt>lines of Python, plus about the same in tests</dt><dd><b>~20K</b></dd></div>
+    </dl>
+    <p class="meta" style="margin-top:.6rem">Also: 40 API routes, 56 pre-rendered spoken phrases.</p>
+  </div>
+
+  <div class="sub rv">
+    <h3>What I'd improve next</h3>
+    <ul class="next">
+      <li><strong>Train a driver-attention model.</strong> Today driver attention is rule-based on face landmarks. A trained model should replace it.</li>
+      <li><strong>Log a multi-day continuous run.</strong> A long logged run shows slow drift that everyday driving does not.</li>
+      <li><strong>Harden the audio inside the emergency call.</strong> The call goes out through the paired phone. Getting the spoken message into a live Bluetooth call cleanly every time is the part I am still improving.</li>
+    </ul>
+    <p class="note yo-note">The repo is private. <a href="mailto:ansh2004anshkumar@gmail.com">Email me</a> and I'll walk you through the code and the board on a call.</p>
+  </div>
+</section>
+
+<!-- Rakshak -->
+<section class="sheet case" id="rakshak" aria-labelledby="h-rakshak">
+  <header class="sheet-head rv">
+    <h2 id="h-rakshak">Rakshak</h2>
+    <p class="meta">Android-first safety app for India's gig delivery riders and drivers.</p>
+  </header>
+
+  <div class="yo-intro">
+    <div>
+      <p class="lead">Rakshak shares your shift location with a trusted crew automatically, checks on you if you stop too long, and sends a one-tap SOS.</p>
+      <p class="prose" style="margin-top:.9rem">This is Launch Base, the first of three planned releases.</p>
+    </div>
+    <dl class="tb">
+      <div style="grid-column:1 / -1"><dt>Status</dt><dd>Early prototype: Android app and backend built, tested on a real Android phone in an offline build; not yet connected end to end.</dd></div>
+      <div><dt>App</dt><dd>Kotlin, Jetpack Compose <span>Hindi and English throughout</span></dd></div>
+      <div><dt>Backend</dt><dd>Supabase <span>Row-level security on every table</span></dd></div>
+    </dl>
+  </div>
+
+  <div class="sub">
+    <h3 id="h-sos">How an SOS gets out</h3>
+    <figure class="sos-fig drawing" id="sos" data-scn="sends" aria-labelledby="h-sos">
+      <div class="arch-ctl">
+        <div class="seg two" role="group" aria-label="Scenario shown in the diagram">
+          <button class="seg-b" type="button" data-set="sends" aria-pressed="true">Rider sends</button>
+          <button class="seg-b" type="button" data-set="silent" aria-pressed="false">Phone goes silent</button>
+        </div>
+      </div>
+      <p class="arch-status" id="sos-status" role="status" aria-live="polite">Rider sends. SOS is pressed on the locked phone, the countdown runs, and the alert goes out to the crew.</p>
+
+      <div class="lanes">
+        <div class="lane">
+          <h4>Rider phone</h4>
+          <ol role="list" aria-label="Steps on the rider's phone">
+            <li class="lb r1"><span class="lt"><b class="n">1</b>SOS pressed</span><span class="role">On the lock screen. The phone stays locked, and no exact coordinates are shown there.</span></li>
+            <li class="lb r2 dn"><span class="lt"><b class="n">2</b>10-second countdown</span><span class="role">Cancel sits on the notification.</span><span class="cd" aria-hidden="true"><i></i></span></li>
+            <li class="lb r3 dn x-send">
+              <span class="on-sends"><span class="lt"><b class="n">3</b>Send</span><span class="role">From the notification, without unlocking.</span></span>
+              <span class="on-silent"><span class="lt"><b class="n">3</b>Phone goes silent</span><span class="role">Nothing more arrives from the phone.</span></span>
+            </li>
+          </ol>
+        </div>
+        <div class="lane">
+          <h4>Server</h4>
+          <ol role="list" aria-label="Steps on the server">
+            <li class="lb loc r2 lf x-pre"><span class="lt"><b class="n">2</b>Record pre-armed</span><span class="role">Created the moment the countdown starts.</span></li>
+            <li class="lb loc r3 lf x-srv">
+              <i class="up" aria-hidden="true"></i>
+              <span class="on-sends"><span class="lt"><b class="n">4</b>Alert sent</span><span class="role">The send arrives and the server alerts the crew.</span></span>
+              <span class="on-silent"><span class="lt"><b class="n">4</b>Sends anyway</span><span class="role">The phone went silent, so the server sends the alert itself.</span></span>
+            </li>
+          </ol>
+        </div>
+        <div class="lane">
+          <h4>Crew phones</h4>
+          <ol role="list" aria-label="Steps on the crew's phones">
+            <li class="lb loc r3 lf x-crew"><span class="lt"><b class="n">5</b>Crew alerted</span><span class="role">The alert fans out to the rider's trusted crew.</span></li>
+          </ol>
+        </div>
+      </div>
+      <p class="key">
+        <span><span class="sw" aria-hidden="true"></span>Solid: run on a real phone.</span>
+        <span><span class="sw loc" aria-hidden="true"></span>Dashed: built and tested locally, not yet end to end.</span>
+      </p>
+
+      <div class="walk">
+        <div class="walk-i" data-for="sends">
+          <h4>Rider sends</h4>
+          <ol>
+            <li><span>The rider presses SOS on the lock screen. The phone stays locked, and the lock screen never shows exact coordinates.</span></li>
+            <li><span>A 10-second countdown starts, with Cancel on the notification. At the same moment the server pre-arms a record.</span></li>
+            <li><span>If it is not cancelled, the SOS is sent. Cancel and Send both work from the notification without unlocking.</span></li>
+            <li><span>The server fans the alert out to the crew's phones.</span></li>
+          </ol>
+        </div>
+        <div class="walk-i" data-for="silent">
+          <h4>Phone goes silent</h4>
+          <ol>
+            <li><span>SOS is pressed and the countdown starts, as before.</span></li>
+            <li><span>The server has already pre-armed a record, at the start of the countdown.</span></li>
+            <li><span>The phone goes silent before it can send.</span></li>
+            <li><span>The server sends the alert anyway, and it fans out to the crew.</span></li>
+          </ol>
+        </div>
+      </div>
+      <figcaption>Drawn for this page to show the SOS flow; not a screenshot.</figcaption>
+    </figure>
+  </div>
+
+  <div class="sub">
+    <h3>How it is built</h3>
+    <ol class="built">
+      <li>
+        <h4>An automatic shift start keeps location on the phone until it is confirmed.</h4>
+        <p>When a shift starts automatically, the location stays on the phone. Nothing is shared until the shift is confirmed, and Undo erases what was held.</p>
+      </li>
+      <li>
+        <h4>One upload call is also the heartbeat.</h4>
+        <p>A single idempotent call carries the batched location and doubles as the heartbeat. GPS adapts, every 15 seconds while moving and every 60 seconds while stationary, so the radio can sleep.</p>
+      </li>
+      <li>
+        <h4>The crew map polls instead of holding sockets open.</h4>
+        <p>The map polls every 25 seconds. That is a deliberate cost choice over realtime sockets.</p>
+      </li>
+      <li>
+        <h4>Privacy is enforced in the database and again at read time.</h4>
+        <p>Every table has row-level security. Read-time filters make a hidden member look the same as one who is off shift, and location is coarsened after 30 minutes and gone after 2 hours.</p>
+      </li>
+      <li>
+        <h4>Release builds fail closed.</h4>
+        <p>Fake data exists only in debug builds.</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="sub">
+    <h3>Checked on a real phone</h3>
+    <p class="meta" style="margin-bottom:.6rem">Samsung Galaxy A15, Android 15, offline build.</p>
+    <dl class="parts wide-dt">
+      <div><dt>Auto Shift</dt><dd>Bench test. The location service started with a first GPS fix in 0.7 to 1.6 s at about 11 m accuracy, and Undo discarded the held points.</dd></div>
+      <div><dt>Onboarding</dt><dd>Completes in English and in Hindi.</dd></div>
+      <div><dt>SOS</dt><dd>Works from a PIN-locked phone: the 10-second countdown, then Cancel and Send from the notification without unlocking.</dd></div>
+    </dl>
+  </div>
+
+  <div class="sub">
+    <h3>Size</h3>
+    <dl class="parts cols wide-dt">
+      <div><dt>App</dt><dd>About 61,600 lines of Kotlin in 13 Gradle modules.</dd></div>
+      <div><dt>Backend</dt><dd>About 30,200 lines of SQL: 50 migrations and about 83 tables, plus 5 edge functions.</dd></div>
+      <div><dt>Tests</dt><dd>1,148 test functions in 97 Kotlin test files, 38 database test files and 84 edge-function tests.</dd></div>
+      <div><dt>Process</dt><dd>5 CI workflows with secret scanning, and 13 architecture decision records.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- Tansh -->
+<section class="sheet case" id="tansh" aria-labelledby="h-tansh">
+  <header class="sheet-head rv">
+    <h2 id="h-tansh">Tansh</h2>
+    <p class="meta">Self-hosted media streaming server and app.</p>
+  </header>
+
+  <div class="yo-intro">
+    <div>
+      <p class="lead">Tansh is a self-hosted media streaming server and app for my own media library, with profiles and a synchronized watch party.</p>
+    </div>
+    <dl class="tb">
+      <div><dt>Status</dt><dd>Working build</dd></div>
+      <div><dt>Stack</dt><dd>Node.js, Express, Socket.IO, ffmpeg <span>React and hls.js in the app</span></dd></div>
+    </dl>
+  </div>
+
+  <div class="sub">
+    <h3 id="h-flow">How each file reaches the player</h3>
+    <figure class="flow-fig drawing" id="flow" data-scn="direct" aria-labelledby="h-flow">
+      <div class="arch-ctl">
+        <div class="seg" role="group" aria-label="Kind of file shown in the diagram">
+          <button class="seg-b" type="button" data-set="direct" aria-pressed="true">Plays as it is</button>
+          <button class="seg-b" type="button" data-set="remux" aria-pressed="false">Needs repackaging</button>
+          <button class="seg-b" type="button" data-set="encode" aria-pressed="false">Needs re-encoding</button>
+        </div>
+      </div>
+      <p class="arch-status" id="flow-status" role="status" aria-live="polite">Plays as it is. The file goes out untouched as a direct range stream.</p>
+
+      <div class="flow">
+        <div class="fb fl-in"><span class="lt">A file is requested</span><span class="role">The server chooses one of three paths for each file.</span></div>
+        <ul class="fl-br" role="list" aria-label="The three ways the server can deliver a file">
+          <li class="fb b-direct"><span class="lt">Direct range stream</span><span class="role">The browser can play the file as it is, so it is sent untouched.</span></li>
+          <li class="fb b-remux"><span class="lt">Stream-copy remux</span><span class="role">The codecs are playable but the file needs repackaging. The streams are copied into HLS without re-encoding.</span></li>
+          <li class="fb b-enc"><span class="lt">Full re-encode</span><span class="role">The codecs are not playable. ffmpeg re-encodes to HLS, with a GPU path, and keeps the segments aligned.</span></li>
+        </ul>
+        <div class="fb fl-out"><span class="lt">Player</span><span class="role">In the browser app.</span></div>
+      </div>
+      <figcaption>Drawn for this page to show the decision; not a screenshot.</figcaption>
+    </figure>
+  </div>
+
+  <div class="sub">
+    <h3>How it is built</h3>
+    <ol class="built">
+      <li>
+        <div>
+          <h4>A phone acting as the server throttles instead of overheating.</h4>
+          <figure class="therm">
+            <div class="th drawing" aria-hidden="true">
+              <span>Full load</span>
+              <span class="th-mid">Holds its state</span>
+              <span>Throttled</span>
+            </div>
+            <figcaption class="meta">Cooler on the left, hotter on the right.</figcaption>
+          </figure>
+        </div>
+        <p>Concurrency control is thermal-aware: as the device heats up, the server takes on less work at once. The control has hysteresis. Throttling starts at one temperature and lifts at a lower one, so it does not flip back and forth around a single point.</p>
+      </li>
+      <li>
+        <h4>The watch party has one host in charge.</h4>
+        <p>Everyone's playback stays in sync over Socket.IO. One viewer is the host and has authority over playback, and the host role can be transferred to another viewer.</p>
+      </li>
+      <li>
+        <h4>Each viewer has a profile.</h4>
+        <p>Profiles sit behind a PIN gate in the app.</p>
+      </li>
+    </ol>
+    <p class="meta" style="margin-top:1rem">18,429 lines of JS/JSX/CSS, 17 backend services.</p>
+  </div>
+</section>
+
+<!-- Other work -->
+<section class="sheet" id="work" aria-labelledby="h-work">
+  <header class="sheet-head rv">
+    <h2 id="h-work">Other work</h2>
+    <p class="meta">Four smaller builds, each labelled with its status.</p>
+  </header>
+  <ul class="led">
+    <li class="rv">
+      <div class="side">
+        <h3>Wholesale operations system</h3>
+        <span class="tag">Web system deployed</span>
+        <p>The native app is a working build. It is not on the App Store.</p>
+      </div>
+      <div>
+        <p class="what">The back office for a wholesale business: an admin panel for staff, a scan, pick and pack web app for the warehouse, and a native SwiftUI warehouse app for Mac, iPhone and iPad.</p>
+        <dl>
+          <div><dt>Hardest part</dt><dd>Scanning never waits on the network. The native app updates the screen at once, sends every write through one ordered queue, and re-syncs from the server if a write fails.</dd></div>
+          <div><dt>Server side</dt><dd>A warehouse geofence the server enforces on every request, with an accuracy cap, a freshness window and per-device approval. A self-hosted document check that reads licences with OCR in a worker with a hard timeout and returns pass, reject or review. A daily job scheduler that claims each run in Postgres so a restart cannot run it twice.</dd></div>
+          <div><dt>Stack</dt><dd class="mono">TypeScript, React, Hono on Node, Postgres, Tesseract.js, Swift, SwiftUI, AVFoundation, Vision</dd></div>
+        </dl>
+      </div>
+    </li>
+    <li class="rv">
+      <div class="side">
+        <h3>CarryOn</h3>
+        <span class="tag">Working prototype</span>
+        <p>CarryOn is a codename. Payments and ID checks are simulated.</p>
+      </div>
+      <div>
+        <p class="what">A peer-to-peer parcel delivery marketplace. A traveller already making a trip carries a sender's parcel, and the money sits in escrow until the delivery is confirmed.</p>
+        <dl>
+          <div><dt>Hardest part</dt><dd>The escrow is a state machine with an append-only ledger that the database refuses to edit. One storage test contract runs against both SQLite and Postgres, and the time-based money rules are tested on a fake clock. 354 backend tests.</dd></div>
+          <div><dt>Stack</dt><dd class="mono">Node.js, PostgreSQL, SQLite, React Native, Expo, TypeScript</dd></div>
+        </dl>
+      </div>
+    </li>
+    <li class="rv">
+      <div class="side">
+        <h3>Bloom With You</h3>
+        <span class="tag">Pre-launch</span>
+        <p><a href="https://bloomwithyou.com" rel="noopener">Visit bloomwithyou.com</a></p>
+      </div>
+      <div>
+        <p class="what">A plant-gifting online store: send a living plant with a personal note instead of flowers.</p>
+        <dl>
+          <div><dt>Hardest part</dt><dd>The server sets every price. Checkout sends only item codes and quantities, and the quote and the charge run the same pricing code, so they cannot disagree.</dd></div>
+          <div><dt>Stack</dt><dd class="mono">React, TypeScript, Vite, Tailwind, shadcn/ui, Supabase, Stripe in test mode</dd></div>
+        </dl>
+      </div>
+    </li>
+    <li class="rv">
+      <div class="side">
+        <h3>Agent Office</h3>
+        <span class="tag">Fork contribution</span>
+        <p>61 commits to a fork of the open-source AgentSystemLabs/agent-office. The 3D office itself is the upstream project's work.</p>
+      </div>
+      <div>
+        <p class="what">A 3D browser office where AI coding agents sit at desks with live terminals. My commits add a management layer on top of it.</p>
+        <dl>
+          <div><dt>Hardest part</dt><dd>A governance layer for the agents: spending caps per role, risk labels that hold a task until the owner approves it, and tracked handoffs. It also adds control from a phone over Telegram and Slack, and sync between devices.</dd></div>
+          <div><dt>Stack</dt><dd class="mono">TypeScript, Node.js, Telegram Bot API, Slack Socket Mode</dd></div>
+        </dl>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- Background -->
+<section class="sheet plain" id="background" aria-labelledby="h-background">
+  <header class="sheet-head rv">
+    <h2 id="h-background">Background</h2>
+  </header>
+  <ol class="hist rv" role="list" aria-label="Work history, newest first">
+    <li>
+      <p class="meta">Aug 2026 to present</p>
+      <div>
+        <h3>Helix Data Creator</h3>
+        <p class="org">Figure AI (contract via Aerotek), San Jose, CA</p>
+        <p class="did"><a href="#figure">See the Figure AI section</a></p>
+      </div>
+    </li>
+    <li>
+      <p class="meta">Jan 2026 to Jul 2026</p>
+      <div>
+        <h3>Delivery Driver</h3>
+        <p class="org">Amazon Logistics, Houston, TX</p>
+        <p class="did">Ran last-mile delivery routes using scanning, GPS and dispatch systems.</p>
+      </div>
+    </li>
+    <li>
+      <p class="meta">Mar 2024 to Jan 2026</p>
+      <div>
+        <h3>Administrative &amp; Inventory Coordinator</h3>
+        <p class="org">High Altitude Wholesale, Houston, TX</p>
+        <p class="did">Cut handling errors by about 15% by improving warehouse processes. Ran inventory tracking and shipment documentation. Trained and onboarded 5+ new employees.</p>
+      </div>
+    </li>
+    <li>
+      <p class="meta">Aug 2024 to Jul 2025</p>
+      <div>
+        <h3>POS / Retail Operations Associate</h3>
+        <p class="org">Delta Food Stop, Texas City, TX</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="bg-grid rv">
+    <div>
+      <h3>Education</h3>
+      <ul class="recs">
+        <li>Associate Degree in Computer Science, in progress <span>Houston Community College, online</span></li>
+        <li>GED <span>Math 90th percentile, Language Arts 93rd percentile</span></li>
+      </ul>
+      <h3>Recognition</h3>
+      <ul class="recs">
+        <li>National Prize, Game Development Competition</li>
+      </ul>
+    </div>
+    <details id="skills" open>
+      <summary><h3>Skills</h3></summary>
+      <dl class="parts wide-dt">
+        <div><dt>Hardware</dt><dd>Custom PCB design and assembly, soldering, wiring, sensor integration (OBD-II, IMU, GPS)</dd></div>
+        <div><dt>Embedded Linux</dt><dd>Raspberry Pi, systemd services, unattended operation with recovery after power loss</dd></div>
+        <div><dt>Services</dt><dd>Python, ZeroMQ pub/sub, FastAPI, Git</dd></div>
+        <div><dt>On-device AI</dt><dd>TFLite, YOLOv8n, MediaPipe, whisper.cpp, NeuTTS</dd></div>
+        <div><dt>Apps and web</dt><dd>Swift and SwiftUI, TypeScript, React, Node.js, Postgres</dd></div>
+        <div><dt>Operations</dt><dd>Jira, equipment inventory and check-in/check-out, Excel, Google Sheets, PowerPoint, Outlook</dd></div>
+        <div><dt>Languages</dt><dd>English, Hindi, Punjabi, Urdu, Haryanvi</dd></div>
+      </dl>
+    </details>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="sheet plain contact" id="contact" aria-labelledby="h-contact">
+  <header class="sheet-head rv">
+    <h2 id="h-contact">Contact</h2>
+  </header>
+  <div class="rv">
+    <p class="ask">Hiring for hands-on robotics work? Email me.</p>
+    <a class="mail" href="mailto:ansh2004anshkumar@gmail.com">ansh2004anshkumar@gmail.com</a>
+    <p class="btns">
+      <a class="btn" href="https://www.linkedin.com/in/ansh-kumar-252ab0281" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/Ansh-0811" rel="noopener">GitHub</a>
+    </p>
+    <p class="prose">I'm in San Jose, open to travel, and can lift 50 lbs. I'm looking for hands-on roles in robotics operations, data quality and hardware. Email is the fastest way to reach me.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Ansh Kumar, San Jose, CA.</p>
+</footer>
+</div>
+</div>
+
+<script>
+/* Enhancements only. The page reads in full without this script. */
+(function () {
+  var d = document, root = d.documentElement;
+  try {
+    /* If the three-second failsafe in the head already removed this mark, put it back now that the script is running. */
+    root.classList.add('js');
+
+    /* Theme: follows the system until the visitor picks one. The button names the theme it switches to. */
+    var themeBtn = d.getElementById('theme');
+    var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    var isDark = function () {
+      var t = root.getAttribute('data-theme');
+      return t ? t === 'dark' : !!(mq && mq.matches);
+    };
+    var paintTheme = function () {
+      var dark = isDark();
+      themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+      if (root.hasAttribute('data-theme')) {
+        var metas = d.querySelectorAll('meta[name="theme-color"]');
+        for (var m = 0; m < metas.length; m++) metas[m].setAttribute('content', dark ? '#0B2545' : '#ECEFF2');
+      }
+    };
+    if (themeBtn) {
+      themeBtn.hidden = false;
+      paintTheme();
+      themeBtn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('ak-theme', next); } catch (e) {}
+        paintTheme();
+      });
+      if (mq && mq.addEventListener) mq.addEventListener('change', paintTheme);
+    }
+
+    var hasIO = 'IntersectionObserver' in window;
+
+    /* Skills fold away on phones. They are open without scripting and on larger screens. */
+    var skills = d.getElementById('skills');
+    if (skills && window.matchMedia && window.matchMedia('(max-width:599px)').matches) skills.removeAttribute('open');
+
+    /* First time on screen: add a class once, then stop watching. Nothing is hidden before that; it only starts the heading rules and the ring drawing. */
+    var reveals = d.querySelectorAll('.rv');
+    if (hasIO) {
+      var revealer = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            entries[i].target.classList.add('in');
+            revealer.unobserve(entries[i].target);
+          }
+        }
+      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+      for (var r = 0; r < reveals.length; r++) revealer.observe(reveals[r]);
+    } else {
+      for (var q = 0; q < reveals.length; q++) reveals[q].classList.add('in');
+    }
+
+    /* Section index: mark the section being read. */
+    var links = d.querySelectorAll('.top nav a');
+    var setCurrent = function (id) {
+      for (var i = 0; i < links.length; i++) {
+        if (links[i].getAttribute('href') === '#' + id) links[i].setAttribute('aria-current', 'true');
+        else links[i].removeAttribute('aria-current');
+      }
+    };
+    if (hasIO) {
+      var spy = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) setCurrent(entries[i].target.id);
+        }
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      var sections = d.querySelectorAll('main > section[id]');
+      for (var s = 0; s < sections.length; s++) spy.observe(sections[s]);
+    }
+
+    /* Diagrams: each one has a scenario switcher that sets data-scn on its figure and updates its status line. */
+    var wire = function (figId, statusId, MSG) {
+      var fig = d.getElementById(figId);
+      var statusEl = d.getElementById(statusId);
+      if (!fig || !statusEl) return null;
+      var segs = fig.querySelectorAll('.seg-b');
+      var setScenario = function (name) {
+        if (!MSG[name]) return;
+        fig.setAttribute('data-scn', '');
+        void fig.offsetWidth; /* restarts the one-shot sequence when a scenario is chosen again */
+        fig.setAttribute('data-scn', name);
+        fig.classList.add('seen');
+        for (var i = 0; i < segs.length; i++) {
+          segs[i].setAttribute('aria-pressed', String(segs[i].getAttribute('data-set') === name));
+        }
+        statusEl.textContent = MSG[name];
+      };
+      for (var b = 0; b < segs.length; b++) {
+        segs[b].addEventListener('click', function () { setScenario(this.getAttribute('data-set')); });
+      }
+      return fig;
+    };
+
+    /* YoCam: the bus messages only move while the diagram is on screen. */
+    var arch = wire('arch', 'arch-status', {
+      normal: 'Normal drive. Every service is running and the recorder is writing video.',
+      vision: 'Vision has stopped. The recorder keeps writing video, and crash detection still runs on the IMU.',
+      crash: 'Crash detected. An IMU spike raises the alert. If it goes unconfirmed for 10 seconds, YoCam places an emergency call through the paired phone.'
+    });
+    if (arch) {
+      if (hasIO) {
+        new IntersectionObserver(function (entries) {
+          arch.classList.toggle('is-live', entries[entries.length - 1].isIntersecting);
+        }, { threshold: 0 }).observe(arch);
+      } else {
+        arch.classList.add('is-live');
+      }
+    }
+
+    /* Rakshak: the SOS sequence plays once, the first time the diagram is well into view. */
+    var sos = wire('sos', 'sos-status', {
+      sends: 'Rider sends. SOS is pressed on the locked phone, the countdown runs, and the alert goes out to the crew.',
+      silent: 'Phone goes silent. The server pre-armed a record when the countdown started, so it sends the alert itself.'
+    });
+    if (sos) {
+      if (hasIO) {
+        var sosSeen = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+              sos.classList.add('seen');
+              sosSeen.disconnect();
+            }
+          }
+        }, { rootMargin: '0px 0px -25% 0px', threshold: 0 });
+        sosSeen.observe(sos);
+      } else {
+        sos.classList.add('seen');
+      }
+    }
+
+    /* Tansh: pick a kind of file to mark the path it takes. */
+    wire('flow', 'flow-status', {
+      direct: 'Plays as it is. The file goes out untouched as a direct range stream.',
+      remux: 'Needs repackaging. The streams are copied into HLS without re-encoding.',
+      encode: 'Needs re-encoding. ffmpeg re-encodes the file to HLS, with a GPU path.'
+    });
+
+    window.__akReady = true;
+  } catch (err) {
+    root.classList.remove('js');
+  }
+})();
+</script>
+</body>
+</html>
